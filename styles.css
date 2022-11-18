@@ -20,6 +20,7 @@ body {
 
 .middle {
     display: flex;
+    flex: 1;
 }
 
 .sidebar{
@@ -86,8 +87,10 @@ button {
 }
 
 .footer {
-    min-height: 10%;
+    height: 72px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(182, 185, 188);
+    font-style: italic;
 }
