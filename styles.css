@@ -47,48 +47,50 @@ a {
 }
 .calculator {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    min-width: 300px;
 }
-
-.screen, .container {
+.calc-container {
     width: 75%;
-
-    display: flex;
-    border: 1px solid black;
     border-radius: 5px;
-
+    background-color: black;
+    height: 60%;
 }
 .screen {  
+    border-radius: 5px;
     background-color: grey;
+    font-size: 60px;
+    color: white;
+    display: flex;
     justify-content: right;
     align-items: center;
-    height: 10%;
-    font-size: 50px;
-    text-indent: 20px;
-    color: white;
+    height: 20%;
 }
-.container {
+
+.btn-container {
+    display: flex;
     flex-wrap: wrap;
-    background-color: black;
-    height: 50%;
+    height: 80%;
 }
 
 .btn {
     flex: 0 0 25%;
-    width: 50%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 button {
-    width: 50%;
+    width: 45%;
+    height: 90%;
     border-radius: 50%;
     margin: 2px;
     border: 1px solid;
     color: white;
-    font-size: 18px;
+    font-size: 16px;
+    text-align: center;
 }
 
 .operator {
@@ -111,7 +113,7 @@ button {
 }
 
 .bigger-btn > button {
-    width: 130px;
+    width: 75%;
     border-radius: 25px;
 }
 
@@ -122,4 +124,10 @@ button {
     align-items: center;
     background-color: rgb(182, 185, 188);
     font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
 }
