@@ -65,7 +65,8 @@ a {
     background-color: black;
     height: 60%;
 }
-.screen {  
+
+#display {  
     border-radius: 5px;
     background-color: grey;
     font-size: 60px;
