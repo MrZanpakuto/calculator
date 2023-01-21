@@ -48,13 +48,13 @@ nav {
     width: 100px;
 }
 
-.middle {
+main {
     display: flex;
     /* flex: 1; */
     height: 30rem;
 }
 
-.sidebar{
+aside {
     flex-shrink: 0;
     padding: 16px;
     background-color:rgb(0, 115, 255);
@@ -169,7 +169,7 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .sidebar {
+    aside {
         display: none;
     }
 }
