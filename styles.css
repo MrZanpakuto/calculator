@@ -1,45 +1,72 @@
-body {
-    display: flex;
-    flex-direction: column;
+html, body {
+    min-height: 100vh;
     margin: 0;
-    min-height:100vh;
-    font-family: 'Ubuntu', sans-serif;
 }
 
-header {   
-    font-size: 1rem;
+body {
+    font-family: 'Ubuntu', sans-serif;
+    color: #f1f1f1;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 1fr 1fr 40px;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+    gap: 15px;
+}
+
+header, aside, footer {
+    border-radius: 15px;
+}
+
+header { 
+    grid-column: 1/3; 
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-weight: 900;
+    justify-content: center;
+    align-items: center;
     background: linear-gradient(
         rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.5)),url("./images/calc-image.jpg") ;
+        rgba(0, 0, 0, 0.5)),url("./images/dan-cristian-padure-xJLN32FO7AY-unsplash.jpg") ;
     background-repeat: no-repeat;   
     background-size: 100% auto; 
-    height: 25rem;
 }   
 
-
-header, footer {
-    color: #f1f1f1;
-    
-}
-
 .logo {
-        font-size: 2rem;
+        font-size: 3rem;
         font-weight: 900;
         font-style: italic;
 }
 
-nav {
-    display: flex;
-    gap: 1rem;
+aside {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    padding: 16px;
+    background-color:rgb(0, 115, 255);
 }
 
-.nav-links {
-    display: flex;
-    gap: 0.5rem;
+aside h3 {
+    font-size: 22px;
+    margin: 0 auto;
+    padding-bottom: 10px; 
+}
+
+aside > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+aside > ul > li {
+    margin-bottom: 10px;
+}
+
+aside > ul > li > a {
+    font-size: 18px;
+    text-decoration: none;
+    color: #f1f1f1;
 }
 
 .signup {
@@ -48,72 +75,36 @@ nav {
     width: 100px;
 }
 
-main {
-    display: flex;
-    /* flex: 1; */
-    height: 30rem;
+.calc-container{
+   grid-column: 2/3;
+   grid-row: 2/3;
+
+   display: flex;
+   flex-direction: column;
 }
 
-aside {
-    flex-shrink: 0;
-    padding: 16px;
-    background-color:rgb(0, 115, 255);
-}
-
-.sidebar-title {
-    font-size: 26px;
-    padding-bottom: 10px; 
-    color: rgba(255, 255, 255, 0.8);   
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-li {
-    margin-bottom: 16px;
-}
-
-a {
-    font-size: 24px;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-}
-.calculator {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-width: 300px;
-}
-.calc-container {
-    width: 75%;
-    border-radius: 5px;
-    background-color: black;
-    height: 60%;
+#display, .btn-container{
     box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 6px rgba(0,0,0,0.45);
-    max-width: 500px;
-    max-height: 500px;
 }
 
 #display {  
-    border-radius: 5px;
+    border-radius: 15px 15px 0px 0px;
     background-color: grey;
-    font-size: 60px;
+    font-size: 4rem;
     color: white;
     display: flex;
     justify-content: right;
     align-items: center;
     height: 20%;
-    padding-right: 25px;
+    padding-right: 4rem;
 }
 
 .btn-container {
+    background-color: black;
     display: flex;
     flex-wrap: wrap;
     height: 80%;
+    border-radius: 0px 0px 15px 15px;
 }
 
 .btn {
@@ -161,17 +152,43 @@ button {
 }
 
 footer {
-    height: 72px;
+    grid-column: 1/3;
+    grid-row: 3/4;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #282A35;
+    background-color: black;
 }
 
+/* style mobile view */
 @media (max-width: 768px) {
+
     aside {
         display: none;
     }
+    .container{
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    header, footer {
+        flex-grow: 0.75;
+    }
+
+    .calc-container{
+        flex-grow: 3;
+    }
+
+    #display{
+        flex-grow: 0.20;
+    }
+    
+    .btn-container {
+        flex-grow: 3;
+    }
+    
 }
 /* applied with js */
 #selected,
