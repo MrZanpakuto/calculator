@@ -126,7 +126,7 @@ button {
     cursor: pointer;
 }
 
-#equal,
+.equal,
 .operator {
     background-color: orange;
     border: none;
@@ -139,10 +139,13 @@ button {
     
 }
 
-.top-btn {
+.percent,
+.plus-minus,
+.clear {
     background-color: rgb(176, 174, 174);
     color: black;
 }
+
 .bigger-btn {
     flex-grow: 1;
 }
@@ -192,7 +195,6 @@ footer {
     
 }
 /* applied with js */
-#selected,
 .selected {
     background-color: white;
     color: orange;
