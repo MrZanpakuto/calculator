@@ -164,7 +164,7 @@ footer {
     background-color: black;
 }
 
-/* style mobile view */
+/* style mobile/tablet view */
 @media (max-width: 768px) {
 
     aside {
@@ -176,23 +176,24 @@ footer {
         flex-direction: column;
         justify-content: center;
     }
+
     header, footer {
         flex-grow: 0.75;
     }
 
     .calc-container{
         flex-grow: 3;
+        display: flex;
     }
 
-    #display{
-        flex-grow: 0.20;
+    #display {
+        flex: 0.75 1 0;
         padding-right: 8%;
     }
     
     .btn-container {
-        flex-grow: 3;
+       flex: 3 1 0;
     }
-    
 }
 /* applied with js */
 .selected {
