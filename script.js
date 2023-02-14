@@ -1,3 +1,139 @@
+//global variables for calculator 
+let operatorSelection = '';
+let currNumber = '';
+let prevNumber = '';
+
+//html collection of button elements
+const numbers = document.getElementsByClassName('numbers');
+const operators = document.getElementsByClassName('operator');
+
+//button elements
+const clearButton = document.querySelector('.clear');
+const percentButton = document.querySelector('.percent');
+const plusMinusButton = document.querySelector('.plus-minus');
+const equalButton = document.querySelector('.equal');
+
+//convert html collection to array
+//loop thru array of button elements and attach event listener
+Array.from(numbers).forEach(button => { 
+    button.addEventListener('click', () => {
+        combine(button.innerText);
+        addFlash;
+    }) 
+    button.addEventListener('transitionend', removeFlash) 
+    }
+);
+
+Array.from(operators).forEach(x => x.addEventListener('click', getOperator));
+
+clearButton.addEventListener('click', clear);
+percentButton.addEventListener('click', modifyNumber);
+plusMinusButton.addEventListener('click', modifyNumber);
+equalButton.addEventListener('click', () => {
+        evaluate();
+        addFlash;
+        removeFlash;
+    }
+);
+
+//combine characters into string of numbers
+function combine(number) {
+
+     // return if decimal is already in current number
+     if (number === '.' && currNumber.includes('.')) return;
+
+    //limit characters to 9 to fit on screen
+     if (currNumber.length <= 8) {
+        currNumber +=  number.toString();
+    } else {
+        currNumber;
+    }
+    return formatNumber(currNumber);
+}
+
+function formatNumber(number) {
+    const stringNumber = number.toString();
+    const integerDigits = parseFloat(stringNumber.split('.')[0]);
+    const decimalDigits = stringNumber.split('.')[1];
+
+    let integerDisplay;
+
+    if (isNaN(integerDigits)) {
+        integerDisplay = '';
+    } else {
+        integerDisplay = integerDigits.toLocaleString('en', {maximumFractionDigits: 0})
+    }
+
+    if (decimalDigits != null) {
+        return updateDisplay(`${integerDisplay}.${decimalDigits}`);
+    } else {
+        return updateDisplay(integerDisplay);
+    }
+}
+
+//display numbers on calculator screen
+function updateDisplay(number) {
+    const output = document.getElementById('display');
+    output.innerText = number;
+}
+
+//clear display and global variables
+function clear() {
+        currNumber = '';
+        prevNumber = '';
+        operatorSelection = '';
+        updateDisplay(null);
+        
+        // remove color selection from operator buttons
+        Array.from(operators).forEach(element => element.classList.remove('selected'));
+}
+
+//change output to negative number or decimal
+function modifyNumber(e) {
+    const output = document.getElementById('display');
+
+    if(e.target.textContent == '±' && output.innerText != 0) {
+        currNumber = currNumber * -1;
+
+    } else if(e.target.textContent == '%') {
+        currNumber = currNumber /100;
+    }
+    output.innerText = Intl.NumberFormat('en-US').format(currNumber);
+}
+
+function getOperator(e) {
+    Array.from(operators).forEach(x => x.classList.remove('selected'));
+    e.target.classList.toggle('selected');
+
+    //store operator selection
+    operatorSelection = e.target.textContent;
+
+    prevNumber = currNumber;
+    currNumber = ''; 
+}
+
+function evaluate() {
+    Array.from(operators).forEach(x => x.classList.remove('selected'));
+    // convert string to float
+    const prev = parseFloat(prevNumber);
+    const curr = parseFloat(currNumber);
+
+    if (isNaN(prev) || isNaN(curr)) return;
+
+    //evaluate expression
+    let result = operate(operatorSelection, prev, curr);
+    console.log(typeof result)
+    //covert large numbers to scientific notation
+    if (result.toString().length > 9) {
+        result = Number.parseFloat(result).toExponential(1);
+    }
+
+    currNumber = result;
+
+    //set prev number to null so operate function won't be called back to back on same expression (by clicking equal button consecutively)
+    prevNumber = '';
+    return formatNumber(result);   
+}
 
 //#basic math operators
 function add(x,y) {
@@ -20,104 +156,7 @@ function divide(x,y) {
     }
 }
 
-// #4 Create the functions that populate the display when you click the number buttons. You should be storing the ‘display value’ in a variable somewhere for use in the next step.
-
-
-//html collection of button elements
-const numbers = document.getElementsByClassName('numbers');
-const equal = document.getElementById('equal');
-const operators = document.getElementsByClassName('operator');
-const topButtons = document.getElementsByClassName('top-btn');
-
-equal.addEventListener('click', evaluate);
-
-//convert node list to array
-//loop thru array of button elements and attach listener to each element
-Array.from(numbers).forEach(button => { 
-    button.addEventListener('click', getNumber) 
-    button.addEventListener('transitionend', removeTransition)
-    button.addEventListener('click', flashButton)
-    }
-);
-Array.from(operators).forEach(x => x.addEventListener('click', getOperator));
-Array.from(topButtons).forEach(x => x.addEventListener('click', modifyNumber));
-
-let operatorSelection = '';
-let combinedNumber = '';
-let firstNumber = '';
-let results = '';
-
-//return selected number as input into display function
-function getNumber(e) {
-    return combine(e.target.textContent);
-}
-
-//combine characters into string of numbers
-function combine(number) {
-    //limit characters on screen to 9
-    if (combinedNumber.length <= 8) {
-        combinedNumber += number;
-    } else {
-        combinedNumber;
-    }
-    return display(combinedNumber);
-}
-//format and display numbers on calc screen
-function display(number) {
-    // element for calculator screen 
-    let display = document.getElementById('display');
-    //format numbers with commas
-    let formatNumbs = Intl.NumberFormat('en-US').format(number);
-    display.textContent = formatNumbs;
-}
-
-//clear numbers on display or show as a negative number or decimal
-function modifyNumber(e) {
-    // element for calculator screen 
-    let display = document.getElementById('display');
- 
-    if (e.target.textContent == 'AC') { 
-        combinedNumber = '';
-        firstNumber ='';
-        operatorSelection = '';
-        Array.from(operators).forEach(element => element.classList.remove('selected'));
-        equal.id = 'equal';
-        
-    } else if(e.target.textContent == '±') {
-        combinedNumber = combinedNumber * -1;
-
-    } else if(e.target.textContent == '%') {
-        combinedNumber = combinedNumber /100;
-    }
-
-    display.textContent = Intl.NumberFormat('en-US').format(combinedNumber);
-}
-
-function getOperator(e) {
-    let display = document.getElementById('display');
-    let clickedButton= e.target;
-    Array.from(operators).forEach(element => element.classList.remove('selected'));
-    clickedButton.classList.toggle('selected');
-    equal.id = 'equal';
-
-    //store operator selection
-    operatorSelection = clickedButton.textContent;
-
-    firstNumber = display.textContent.replace('/,/g', '');
-    combinedNumber = ''; 
-}
-
-function evaluate(e) {
-    Array.from(operators).forEach(element => element.classList.remove('selected'));
-    equal.id = 'selected' 
-    //evaluate expression
-    results = operate(operatorSelection, firstNumber * 1, combinedNumber * 1);
-    firstNumber =  results;
-    display(results);
-}
-
-//create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
-
+// perform math operation
 function operate(operator, x, y) {
     if(operator == '+') {
         return add(x,y);
@@ -130,13 +169,12 @@ function operate(operator, x, y) {
     }
 }
 
-function flashButton(e) {
+// style buttons on click
+function addFlash(e) {
     e.target.classList.add('flash');
 }
 
-function removeTransition(e) {
-    // if (e.propertyName !== 'transform') return;
+function removeFlash(e) {
     e.target.classList.remove('flash');
     console.log(e);
 }
-
