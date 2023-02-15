@@ -167,14 +167,6 @@ footer {
 /* style mobile view */
 @media (max-width: 768px) {
 
-    html, body {
-        overflow-y: hidden; 
-    }
-
-    body {
-        position: relative;
-    }
-
     header,
     aside,
     footer {
@@ -182,48 +174,42 @@ footer {
     }
     .container {
         display: flex;
-        border: 1px solid black;
-        padding: 1px;
-        max-height: 100%;
+        padding: 0;
     }
 
     .calc-container{
         flex: 1;
+        padding: 1rem;
     }
     
-     #display
-    ,.btn-container
-    ,.btn > button {
-      border-radius: 0;
-    }
-
     #display {
         flex: 0.75 1 0;
-        padding-right: 8%;    
+        padding-right: 8%;
     }
     
     .btn-container {
-       flex: 3 1 0;
+       flex: 4 1 0; 
     }
 
-    button {
-        height: 100%;
+     button,
+    .bigger-btn > button {  
+        border-radius: 30px;
         width: 100%;
+    }
+    
+    button {
+        height: 90%;
         padding: 0;
         margin: 0;
-        font-size: 2rem;
+        font-size: 1rem;
     }
 
-     .equal
+     #display
+    ,.equal
     ,.operator
     ,.numbers {
         border: 1px solid black;
     }
-
-    .bigger-btn > button {
-        width: 100%;
-    }
-
 }
 /* applied with js */
 .selected {
