@@ -121,7 +121,7 @@ button {
     margin: 2px;
     border: 1px solid;
     color: white;
-    font-size: 16px;
+    font-size: 1rem;
     text-align: center;
     cursor: pointer;
 }
@@ -164,36 +164,57 @@ footer {
     background-color: black;
 }
 
-/* style mobile/tablet view */
+/* style mobile view */
 @media (max-width: 768px) {
 
-    aside {
+    header,
+    aside,
+    footer {
         display: none;
     }
     .container{
-        min-height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
-    }
-
-    header, footer {
-        flex-grow: 0.75;
+        padding: 0;
+        gap: 0;
     }
 
     .calc-container{
-        flex-grow: 3;
+        min-height: 100vh;
         display: flex;
+    }
+    
+     #display
+    ,.btn-container {
+     border-radius: 0;
     }
 
     #display {
         flex: 0.75 1 0;
         padding-right: 8%;
+        
     }
     
     .btn-container {
        flex: 3 1 0;
     }
+
+    .btn > button {
+        height: 80%;
+        width: 80%;
+        border-radius: 50%;
+        font-size: 2rem;
+    }
+
+    .bigger-btn > button {
+        width: 85%;
+        border-radius: 15px;
+    }
+
+
+
+    
 }
 /* applied with js */
 .selected {
