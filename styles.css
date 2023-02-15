@@ -172,49 +172,49 @@ footer {
     footer {
         display: none;
     }
-    .container{
+    .container {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0;
-        gap: 0;
+        border: 1px solid black;
+        padding: 1px;
     }
 
     .calc-container{
-        min-height: 100vh;
-        display: flex;
+        flex: 1;
     }
     
      #display
-    ,.btn-container {
-     border-radius: 0;
+    ,.btn-container
+    ,.btn > button {
+      border-radius: 0;
     }
 
     #display {
         flex: 0.75 1 0;
-        padding-right: 8%;
-        
+        padding-right: 8%;    
     }
     
     .btn-container {
        flex: 3 1 0;
     }
 
-    .btn > button {
-        height: 80%;
-        width: 80%;
-        border-radius: 50%;
+    button {
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
         font-size: 2rem;
     }
 
-    .bigger-btn > button {
-        width: 85%;
-        border-radius: 15px;
+     .equal
+    ,.operator
+    ,.numbers {
+        border: 1px solid black;
     }
 
+    .bigger-btn > button {
+        width: 100%;
+    }
 
-
-    
 }
 /* applied with js */
 .selected {
