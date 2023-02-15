@@ -167,6 +167,14 @@ footer {
 /* style mobile view */
 @media (max-width: 768px) {
 
+    html, body {
+        overflow-y: hidden; 
+    }
+
+    body {
+        position: relative;
+    }
+
     header,
     aside,
     footer {
@@ -176,9 +184,7 @@ footer {
         display: flex;
         border: 1px solid black;
         padding: 1px;
-        max-height: 100vh;
-        overflow-y: hidden;
-        position: relative;
+        max-height: 100%;
     }
 
     .calc-container{
